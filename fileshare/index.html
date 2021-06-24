@@ -43,8 +43,8 @@
                 hx-target="#api_response" mustache-template="response_template">
                 <label for="access_limit">Allow file to be accessed this many times:</label><br>
                 <input type="number" id="access_limit" name="access_limit" value="3"><br>
-                <label for="input_file">Select a file to upload:</label><br>
-                <input type="file" id="input_file" name="input_file"><br>
+                <label for="input_files">Select file(s) to upload:</label><br>
+                <input type="file" id="input_files" name="input_files" multiple><br>
                 <button>Upload</button><br>
                 <progress id='progress' value='0' max='100'></progress>
             </form>
