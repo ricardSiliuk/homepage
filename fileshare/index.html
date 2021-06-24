@@ -28,27 +28,37 @@
 </head>
 
 <body>
+    <script src="https://unpkg.com/htmx.org@1.4.1"></script>
+    <script src="https://unpkg.com/htmx.org@1.4.1/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
     <header>
         <h1>Siliuk.lt</h1>
         <nav><a href="/">Home</a> / <a href="/about">About</a> / <a class="currentpage" href="/fileshare">File
                 sharing</a></nav>
     </header>
     <div id="main">
-        <div id="form">
-            <form method="post" action="https://fs-api.siliuk.lt/" enctype="multipart/form-data">
+        <div id="form" hx-ext="client-side-templates">
+            <form method="post" hx-encoding="multipart/form-data" hx-post="https://fs-api.siliuk.lt/"
+                _='on htmx:xhr:progress(loaded, total) set #progress.value to (loaded/total)*100' hx-swap="innerHTML"
+                hx-target="#api_response" mustache-template="response_template">
                 <label for="access_limit">Allow file to be accessed this many times:</label><br>
                 <input type="number" id="access_limit" name="access_limit" value="3"><br>
                 <label for="input_file">Select a file to upload:</label><br>
                 <input type="file" id="input_file" name="input_file"><br>
-                <input type="submit" value="Submit">
+                <button>Upload</button><br>
+                <progress id='progress' value='0' max='100'></progress>
             </form>
         </div>
-        <div id="result">
+        <div id="api_response">
 
         </div>
         <div id="share">
 
         </div>
+        <template id="response_template">
+            Here's your file link: <a
+                href="https://fs-api.siliuk.lt/{{item_id}}">https://fs-api.siliuk.lt/{{item_id}}</a></p>
+        </template>
 </body>
 
 </html>
