@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    margin: 10px -5px;
+    flex-wrap: wrap;
+}
+
+.item {
+    flex-basis: auto;
+    flex-grow: 1;
+    margin: 10px 5px;
+    min-width: 250px;
+    padding: 5px;
+    -webkit-box-shadow: 9px 15px 29px 0px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 9px 15px 29px 0px rgba(0, 0, 0, 0.36);
+    -moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    box-shadow: 9px 15px 29px 0px rgba(0, 0, 0, 0.36);
+    border-radius: 20px 20px 20px 20px;
+    border: 0px solid #000000;
+}
+
+.icon {
+    margin-bottom: 0;
+    width: 16px;
+}
+
+.currentpage {
+    font-weight: bold;
+}
+
+body {
+    max-width: 750px;
+}
