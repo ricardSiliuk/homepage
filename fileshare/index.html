@@ -28,9 +28,12 @@
 </head>
 
 <body _="on htmx:sendError call alert('A network error occurred, try again later!')">
-    <script src="https://unpkg.com/htmx.org@1.4.1"></script>
-    <script src="https://unpkg.com/htmx.org@1.4.1/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+    <script src="https://unpkg.com/htmx.org@1.5.0/dist/ext/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
+    <script>
+        htmx.logAll();
+    </script>
     <header>
         <h1>Siliuk.lt</h1>
         <nav><a href="/">Home</a> / <a href="/about">About</a> / <a class="currentpage" href="/fileshare">File
@@ -43,12 +46,21 @@
                 hx-target="#api_response" mustache-template="response_template">
                 <label for="access_limit">Allow file to be accessed this many times:</label><br>
                 <input type="number" id="access_limit" name="access_limit" value="3"><br>
+                <label for="time_limit">File will be stored for (in days):</label><br>
+                <input type="number" id="time_limit" name="time_limit" value="3"><br>
+                <label for="password">Password (optional):</label><br>
+                <input type="password" id="password" name="password"><br>
                 <label for="input_files">Select file(s) to upload:</label><br>
                 <input type="file" id="input_files" name="input_files" multiple><br>
                 <button>Upload</button><br>
                 <progress id='progress' value='0' max='100'></progress>
             </form>
         </div>
+        <script>
+            htmx.on('#form', 'htmx:xhr:progress', function (evt) {
+                htmx.find('#progress').setAttribute('value', evt.detail.loaded / evt.detail.total * 100)
+            });
+        </script>
         <div id="api_response">
 
         </div>
@@ -59,6 +71,7 @@
             Here's your file link: <a
                 href="https://fs-api.siliuk.lt/{{item_id}}">https://fs-api.siliuk.lt/{{item_id}}</a></p>
         </template>
+    </div>
 </body>
 
 </html>
